@@ -15,5 +15,6 @@ public class TransactionResponseDto {
     private BigDecimal amount;
     private TransactionType type;
     private TransactionStatus status;
+    private String currency;
     private LocalDateTime transactionDate;
 }

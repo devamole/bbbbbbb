@@ -22,4 +22,3 @@ public class TransactionConfiguration {
         return new TransactionServiceImpl(transactionRepository, cardServiceClient);
     }
 }
-

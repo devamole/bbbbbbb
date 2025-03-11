@@ -8,6 +8,7 @@ import com.credibanco.transactions.infrastructure.client.CardServiceClient;
 import java.math.BigDecimal;
 import java.time.Duration;
 import java.time.LocalDateTime;
+import java.util.List;
 
 public class TransactionServiceImpl implements TransactionService {
 
@@ -20,7 +21,8 @@ public class TransactionServiceImpl implements TransactionService {
     }
 
     @Override
-    public Transaction processRecharge(String cardNumber, BigDecimal amount) {
+    public Transaction processRecharge(String cardNumber, BigDecimal amount, String currency) {
+        validateCurrency(currency);
         boolean success = cardServiceClient.rechargeCard(cardNumber, amount);
         TransactionStatus status = success ? TransactionStatus.SUCCESS : TransactionStatus.REJECTED;
         Transaction transaction = Transaction.builder()
@@ -28,12 +30,14 @@ public class TransactionServiceImpl implements TransactionService {
                 .amount(amount)
                 .type(TransactionType.RECARGA)
                 .status(status)
+                .currency(currency)
                 .build();
         return transactionRepository.save(transaction);
     }
 
     @Override
-    public Transaction processPayment(String cardNumber, BigDecimal amount) {
+    public Transaction processPayment(String cardNumber, BigDecimal amount, String currency) {
+        validateCurrency(currency);
         boolean success = cardServiceClient.debitCard(cardNumber, amount);
         TransactionStatus status = success ? TransactionStatus.SUCCESS : TransactionStatus.REJECTED;
         Transaction transaction = Transaction.builder()
@@ -41,6 +45,7 @@ public class TransactionServiceImpl implements TransactionService {
                 .amount(amount)
                 .type(TransactionType.PAGO)
                 .status(status)
+                .currency(currency)
                 .build();
         return transactionRepository.save(transaction);
     }
@@ -57,5 +62,15 @@ public class TransactionServiceImpl implements TransactionService {
         transaction.setStatus(status);
         return transactionRepository.save(transaction);
     }
-}
 
+    @Override
+    public List<Transaction> listTransactions(String cardNumber) {
+        return transactionRepository.findByCardNumber(cardNumber);
+    }
+
+    private void validateCurrency(String currency) {
+        if (!"USD".equalsIgnoreCase(currency)) {
+            throw new IllegalArgumentException("Currency must be USD");
+        }
+    }
+}

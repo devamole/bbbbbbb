@@ -17,7 +17,7 @@ public class Transaction {
     private BigDecimal amount;
     private TransactionType type;
     private TransactionStatus status;
+    private String currency;
     @Builder.Default
     private LocalDateTime transactionDate = LocalDateTime.now();
 }
-

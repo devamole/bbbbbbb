@@ -29,6 +29,7 @@ public class TransactionEntity {
     @Column(nullable = false)
     private TransactionStatus status;
     @Column(nullable = false)
+    private String currency;
+    @Column(nullable = false)
     private LocalDateTime transactionDate;
 }
-

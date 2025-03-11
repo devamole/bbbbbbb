@@ -16,7 +16,7 @@ public class CardServiceClient {
     private final RestTemplate restTemplate = new RestTemplate();
 
     @Value("${cards.service.url}")
-    private String cardsServiceUrl;
+    String cardsServiceUrl;
 
     public boolean rechargeCard(@NotNull String cardNumber, @NotNull BigDecimal amount) {
         String url = cardsServiceUrl + "/api/cards/" + cardNumber + "/recharge";

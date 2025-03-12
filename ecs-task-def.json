@@ -1,5 +1,5 @@
 {
-  "family": "Cards",
+  "family": "Transactions",
   "networkMode": "awsvpc",
   "executionRoleArn": "arn:aws:iam::725914487651:role/CredibancoEcs",
   "containerDefinitions": [

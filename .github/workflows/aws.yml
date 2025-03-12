@@ -6,8 +6,8 @@ on:
 
 env:
   AWS_REGION: us-east-1                   # Ajusta según tu región
-  ECR_REPOSITORY: ${{ ECR_REPOSITORY }}   # Nombre del repositorio en ECR
-  ECS_SERVICE: $ {{ ECS_SERVICE }}                  # Nombre del servicio ECS
+  ECR_REPOSITORY: ${{ secrets.ECR_REPOSITORY }}   # Nombre del repositorio en ECR
+  ECS_SERVICE: ${{ secrets.ECS_SERVICE }}                  # Nombre del servicio ECS
   ECS_CLUSTER: Credibanco                    # Nombre del clúster ECS
   ECS_TASK_DEFINITION: ecs-task-def.json     # Ruta al task definition en el repo
   CONTAINER_NAME: credibanco-transactions-service   # Nombre del contenedor en el task definition

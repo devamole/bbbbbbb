@@ -19,7 +19,7 @@
       "logConfiguration": {
         "logDriver": "awslogs",
         "options": {
-          "awslogs-group": "/ecs/credibanco-cards-service",
+          "awslogs-group": "/ecs/Transactions",
           "awslogs-region": "us-east-1",
           "awslogs-stream-prefix": "ecs"
         }
